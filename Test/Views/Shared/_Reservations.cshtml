@@ -1,0 +1,122 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+ @model  IEnumerable<Test.Models.ReservationModel> 
+
+
+
+<header>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+</header>
+
+<body>
+    <h1>Your reservations</h1>
+
+    <h2>Current Reservations</h2>
+    <form method="post" asp-controller="Home" asp-action="CancelReservation">
+        <table class="table" style="width:100%">
+            <thead>
+                <tr>
+                    
+                    <th scope="col">
+                        @Html.DisplayNameFor(model => model.ReservationDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ReservationAddress)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.PhoneNum)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ReservationComment)
+                    </th>
+                    <th>
+
+                    </th>
+                </tr>
+            </thead>
+
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    @if (item.ReservationDate >= DateTime.Now)
+                    {
+                       
+
+                        <tr >
+                            <th scope="row">
+                                @Html.DisplayFor(modelItem => item.ReservationDate)
+                            </th>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ReservationAddress)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PhoneNum)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ReservationComment)
+                            </td>
+                            <td>
+                                <input type="submit" value="Cancel reservation" name="CancelReservation" asp-route-id="@item.ReservationId" />
+                            </td>
+
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+
+    
+     
+    </form>
+
+
+    <h2>Previous Reservations</h2>
+    <table class="table" style="width:100%">
+        <thead>
+            <tr>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.ReservationDate)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.ReservationAddress)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.PhoneNum)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.ReservationComment)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                @if (item.ReservationDate < DateTime.Now)
+                {
+                    <tr>
+                        <th scope="row">
+                            @Html.DisplayFor(modelItem => item.ReservationDate)
+                        </th>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ReservationAddress)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PhoneNum)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ReservationComment)
+                        </td>
+
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+
+
+</body>

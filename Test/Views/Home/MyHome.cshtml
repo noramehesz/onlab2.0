@@ -1,0 +1,73 @@
+﻿
+
+@model IEnumerable<Test.Models.GrillModel>
+@using Microsoft.AspNetCore.Identity
+@using Test.Models;
+@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    
+</head>
+<body>
+
+    @if (SignInManager.IsSignedIn(User))
+    {
+
+        <h2>Grills:</h2>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="card-deck">
+                    @foreach (var item in Model)
+                    {
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">A fantastic grill No @item.GrillId </h4>
+                                <p class="card-text">@item.GrillDecription</p>
+                                <p class="card-text">@item.GrillPricePerHour Ft/óra</p>
+                                
+                                    <a class="btn btn-primary" asp-controller="Home" asp-action="ReserveGrill" asp-route-id="@item.GrillId">Choose</a>
+                                
+                                
+                            </div>
+                        </div>
+
+                    }
+                </div>
+            </div>
+        </div>
+    }
+
+    else
+    {
+
+        <h2>Grills:</h2>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="card-deck">
+                    @foreach (var item in Model)
+                    {
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">A fantastic grill No @item.GrillId </h4>
+                                <p class="card-text">@item.GrillDecription</p>
+                                <p class="card-text">@item.GrillPricePerHour Ft/óra</p>
+                               @* @Html.DisplayFor(modelItem => item.GrillType), @Html.DisplayFor(modelItem => item.GrillId)  *@
+                                </div>
+                            </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+    }
+
+
+
+</body>
+</html>
